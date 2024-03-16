@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 554d051b6ece23742a750a75bdebe3c9, type: 3}
   m_Name: TileConfig
   m_EditorClassIdentifier: 
+  speed: 800
+  easeType: 1

@@ -1,11 +1,12 @@
 
 using System;
-
 public static class SystemSignal
 {
-    public static Action<Tile> tileClickEvent;
-    public static void TileClick(Tile tile)
+    public static Action<TileTapStatus> tileTapEvent;
+    public static Action<Tile> getTileEvent;
+    public static Action returnTileEvent;
+    public static void TileTap(TileTapStatus tileTapStatus)
     {
-        tileClickEvent?.Invoke(tile);
+        tileTapEvent?.Invoke(tileTapStatus);
     }
 }
