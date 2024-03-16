@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 800
   easeType: 1
+  perfectTimeThreshold: 0.25
+  greatTimeThreshold: 0.5

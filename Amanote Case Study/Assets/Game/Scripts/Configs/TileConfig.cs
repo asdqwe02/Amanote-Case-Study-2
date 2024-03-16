@@ -5,4 +5,7 @@ public class TileConfig : ScriptableObject
 {
     public float speed;
     public Ease easeType;
+
+    public float perfectTimeThreshold;
+    public float greatTimeThreshold;
 }

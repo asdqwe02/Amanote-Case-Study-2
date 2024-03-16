@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public class LaneController : MonoBehaviour
 {
     [SerializeField] private List<Transform> _lanesPositions;
     [SerializeField] private Transform _endPosition;
+    [SerializeField] private Transform _tapLine;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private Tile _notePrefab;
     [SerializeField] private float _noteSpeed;
@@ -37,10 +36,6 @@ public class LaneController : MonoBehaviour
             note.SetUp(spawnpos, _endPosition.position);
             yield return new WaitForSeconds(_spawnDelay);
         }
-    }
-    private void OnTileClick(Tile tile)
-    {
-        throw new NotImplementedException();
     }
 
     // Update is called once per frame
