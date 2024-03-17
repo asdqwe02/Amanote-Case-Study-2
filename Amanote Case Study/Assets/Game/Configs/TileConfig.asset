@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 554d051b6ece23742a750a75bdebe3c9, type: 3}
   m_Name: TileConfig
   m_EditorClassIdentifier: 
-  speed: 800
+  speed: 1200
+  tileSprite: {fileID: 21300000, guid: 56ecdfe6cb24e5746b9c3ee440719104, type: 3}
   easeType: 1
-  perfectTimeThreshold: 0.25
+  longNoteTileHoldDuration: 0
+  perfectTimeThreshold: 0.1
   greatTimeThreshold: 0.5
+  normalTileSpawnDelay: 1
+  longNoteTileSpawnDelay: 3

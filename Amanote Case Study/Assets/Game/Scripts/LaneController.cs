@@ -8,9 +8,9 @@ public class LaneController : MonoBehaviour
     [SerializeField] private List<Transform> _lanesPositions;
     [SerializeField] private Transform _endPosition;
     [SerializeField] private Transform _tapLine;
-    [SerializeField] private float _spawnDelay;
-    [SerializeField] private Tile _notePrefab;
-    [SerializeField] private float _noteSpeed;
+    [SerializeField] private TileConfig _tileConfig;
+    [SerializeField] private Tile _noteTilePrefab;
+    [SerializeField] private Tile _longNoteTilePrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,9 +32,9 @@ public class LaneController : MonoBehaviour
             }
             var spawnpos = _lanesPositions[laneIndex].position;
             spawnpos.z = 0;
-            var note = Instantiate(_notePrefab, spawnpos, Quaternion.identity);
+            var note = Instantiate(_longNoteTilePrefab, spawnpos, Quaternion.identity);
             note.SetUp(spawnpos, _endPosition.position);
-            yield return new WaitForSeconds(_spawnDelay);
+            yield return new WaitForSeconds(_tileConfig.normalTileSpawnDelay);
         }
     }
 

@@ -1812,9 +1812,9 @@ MonoBehaviour:
   - {fileID: 970613966}
   _endPosition: {fileID: 1478979027}
   _tapLine: {fileID: 1184370626}
-  _spawnDelay: 1
-  _notePrefab: {fileID: 7467327371757758965, guid: 0df5ed0d5c2b8894a9980c47fb5e0943, type: 3}
-  _noteSpeed: 600
+  _tileConfig: {fileID: 11400000, guid: 327bfa2be7ebc2f41923e6cf939cb9ff, type: 2}
+  _noteTilePrefab: {fileID: 2211189703563245532, guid: 0df5ed0d5c2b8894a9980c47fb5e0943, type: 3}
+  _longNoteTilePrefab: {fileID: 7135301558487883912, guid: c2ff7847e3bd2ee47a45b61fa58d3312, type: 3}
 --- !u!1 &2061604016
 GameObject:
   m_ObjectHideFlags: 0
