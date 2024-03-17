@@ -18,5 +18,6 @@ MonoBehaviour:
   longNoteTileHoldDuration: 0
   perfectTimeThreshold: 0.1
   greatTimeThreshold: 0.5
-  normalTileSpawnDelay: 1
-  longNoteTileSpawnDelay: 3
+  normalTileSpawnDelay: 0.5
+  longTileScoreTickTime: 0.5
+  longNoteTileSpawnDelay: 1

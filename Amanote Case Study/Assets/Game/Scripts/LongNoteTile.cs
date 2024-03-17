@@ -1,5 +1,6 @@
 
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 public class LongNoteTile : Tile
@@ -8,6 +9,7 @@ public class LongNoteTile : Tile
     [SerializeField] private SpriteRenderer _effectRenderer;
     private bool _hold;
     private bool _clicked;
+    private TileTapStatus _tapStatus;
     private void Awake()
     {
 
@@ -20,12 +22,12 @@ public class LongNoteTile : Tile
     protected override void Move(float yPos)
     {
         var bottomMiddle = Camera.main.ViewportToWorldPoint(new Vector2(0.5f, 0f));
-        var distance = Mathf.Abs(bottomMiddle.y - transform.position.y - tileConfig.tileLength);
+        var distance = Mathf.Abs(bottomMiddle.y - transform.position.y) + _renderer.size.y;
         // Debug
         //_moveTimeDebug = distance / _tileConfig.speed;
         //
         transform
-            .DOMoveY(bottomMiddle.y - tileConfig.tileLength, distance / tileConfig.speed)
+            .DOMoveY(bottomMiddle.y - _renderer.size.y, distance / tileConfig.speed)
             .SetEase(Ease.Linear)
             .OnComplete(() =>
             {
@@ -37,17 +39,11 @@ public class LongNoteTile : Tile
     {
         if (!_clicked)
         {
-            // Get the mouse position in world space
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            // Perform a raycast to check for collisions
             RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-            // If a collision is detected, get the collision point
             if (hit.collider != null)
             {
                 Vector2 collisionPoint = hit.point;
-                //Debug.Log("Collision Position: " + collisionPoint);
-
                 var diffY = Mathf.Abs(collisionPoint.y - _effectRenderer.transform.position.y);
                 var ogSize = _effectRenderer.size;
                 ogSize.y = diffY;
@@ -55,6 +51,9 @@ public class LongNoteTile : Tile
             }
             _clicked = true;
             _hold = true;
+            _tapStatus = CheckTileTapStatus();
+            StartCoroutine(IScoreTick());
+
         }
 
     }
@@ -74,6 +73,15 @@ public class LongNoteTile : Tile
             //Debug.Log("tap long tile end");
             _hold = false;
             _renderer.color = new Color(1f, 1f, 1f, 0.65f);
+            StopAllCoroutines();
+        }
+    }
+    private IEnumerator IScoreTick()
+    {
+        while (_hold)
+        {
+            SystemSignal.TileTap(_tapStatus);
+            yield return new WaitForSeconds(tileConfig.longTileScoreTickTime);
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,22 +24,29 @@ public class LaneController : MonoBehaviour
         var laneIndex = -1;
         while (true)
         {
-            laneIndex++;
-            if (laneIndex >= _lanesPositions.Count)
-            {
-                laneIndex = 0;
-            }
+            //laneIndex++;
+            //if (laneIndex >= _lanesPositions.Count)
+            //{
+            //    laneIndex = 0;
+            //}
+            laneIndex = Random.Range(0, _lanesPositions.Count);
             var spawnpos = _lanesPositions[laneIndex].position;
             spawnpos.z = 0;
-            var note = Instantiate(_longNoteTilePrefab, spawnpos, Quaternion.identity);
-            note.SetUp(spawnpos, _endPosition.position);
-            yield return new WaitForSeconds(_tileConfig.normalTileSpawnDelay);
+
+            var noteType = Random.Range(0f, 1f);
+            if (noteType <= 0.75f)
+            {
+                var note = Instantiate(_noteTilePrefab, spawnpos, Quaternion.identity);
+                note.SetUp(spawnpos, _endPosition.position);
+                yield return new WaitForSeconds(_tileConfig.normalTileSpawnDelay);
+            }
+            else
+            {
+                var note = Instantiate(_longNoteTilePrefab, spawnpos, Quaternion.identity);
+                note.SetUp(spawnpos, _endPosition.position);
+                yield return new WaitForSeconds(_tileConfig.longNoteTileSpawnDelay);
+            }
+
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }
