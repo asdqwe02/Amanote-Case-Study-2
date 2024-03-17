@@ -10,6 +10,7 @@ public class LaneController : MonoBehaviour
     [SerializeField] private TileConfig _tileConfig;
     [SerializeField] private Tile _noteTilePrefab;
     [SerializeField] private Tile _longNoteTilePrefab;
+    [SerializeField] private float _spawnStartDelay;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class LaneController : MonoBehaviour
     private IEnumerator ISpawnNote()
     {
         var laneIndex = -1;
+        yield return new WaitForSeconds(_spawnStartDelay);
         while (true)
         {
             //laneIndex++;

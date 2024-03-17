@@ -7,6 +7,7 @@ public class LongNoteTile : Tile
 {
     [SerializeField] private SpriteRenderer _renderer;
     [SerializeField] private SpriteRenderer _effectRenderer;
+    [SerializeField] private ParticleSystem _effectParticle;
     private bool _hold;
     private bool _clicked;
     private TileTapStatus _tapStatus;
@@ -48,6 +49,8 @@ public class LongNoteTile : Tile
                 var ogSize = _effectRenderer.size;
                 ogSize.y = diffY;
                 _effectRenderer.size = ogSize;
+                _effectParticle.transform.localPosition += new Vector3(0f, diffY, 0f);
+                _effectParticle.gameObject.SetActive(true);
             }
             _clicked = true;
             _hold = true;
@@ -64,6 +67,10 @@ public class LongNoteTile : Tile
             var ogSize = _effectRenderer.size;
             ogSize.y += tileConfig.speed * Time.deltaTime;
             _effectRenderer.size = ogSize;
+            _effectParticle.transform
+                .DOLocalMoveY(_effectParticle.transform.localPosition.y + tileConfig.speed * Time.deltaTime, Time.deltaTime)
+                .SetEase(Ease.Linear);
+
         }
     }
     private void OnMouseUp()
@@ -73,6 +80,7 @@ public class LongNoteTile : Tile
             //Debug.Log("tap long tile end");
             _hold = false;
             _renderer.color = new Color(1f, 1f, 1f, 0.65f);
+            _effectParticle.gameObject.SetActive(false);
             StopAllCoroutines();
         }
     }
